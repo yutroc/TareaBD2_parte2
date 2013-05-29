@@ -6,7 +6,7 @@ public class AdministradorDeExternos {
     public AdministradorDeExternos() {
     }
 
-    public AdministradorDeExternos(String nivelEducacional, String rute) {
+    public AdministradorDeExternos(String rute, String nivelEducacional) {
         this.nivelEducacional = nivelEducacional;
         this.rute = rute;
     }
