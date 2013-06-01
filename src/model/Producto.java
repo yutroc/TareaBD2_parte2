@@ -1,39 +1,29 @@
 package model;
 public class Producto {
-    private String categoría;
-    private int códigoca;
+    private String categoria;
+    private int codigoca;
     private String nombre;
-    private int número;
+    private int numero;
     private int valorEnPesos;
     private int valorEnPuntos;
 
     public Producto() {
     }
 
-    public Producto(String categoría, int códigoca, String nombre, int número, int valorEnPesos,
-                    int valorEnPuntos) {
-        this.categoría = categoría;
-        this.códigoca = códigoca;
-        this.nombre = nombre;
-        this.número = número;
-        this.valorEnPesos = valorEnPesos;
-        this.valorEnPuntos = valorEnPuntos;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public String getCategoría() {
-        return categoría;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
-    public void setCategoría(String categoría) {
-        this.categoría = categoría;
+    public int getCodigoca() {
+        return codigoca;
     }
 
-    public int getCódigoca() {
-        return códigoca;
-    }
-
-    public void setCódigoca(int códigoca) {
-        this.códigoca = códigoca;
+    public void setCodigoca(int codigoca) {
+        this.codigoca = codigoca;
     }
 
     public String getNombre() {
@@ -44,12 +34,12 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public int getNúmero() {
-        return número;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setNúmero(int número) {
-        this.número = número;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public int getValorEnPesos() {
@@ -73,17 +63,17 @@ public class Producto {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("categoría=");
-        buffer.append(getCategoría());
+        buffer.append("categoria=");
+        buffer.append(getCategoria());
         buffer.append(',');
-        buffer.append("códigoca=");
-        buffer.append(getCódigoca());
+        buffer.append("codigoca=");
+        buffer.append(getCodigoca());
         buffer.append(',');
         buffer.append("nombre=");
         buffer.append(getNombre());
         buffer.append(',');
-        buffer.append("número=");
-        buffer.append(getNúmero());
+        buffer.append("numero=");
+        buffer.append(getNumero());
         buffer.append(',');
         buffer.append("valorEnPesos=");
         buffer.append(getValorEnPesos());

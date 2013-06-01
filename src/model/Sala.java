@@ -1,21 +1,12 @@
 package model;
 public class Sala {
     private int capacidad;
-    private int númerosa;
-    private int númerosu;
+    private int numerosa;
+    private int numerosu;
     private String rutEncargado;
     private int valorEntrada;
 
     public Sala() {
-    }
-
-    public Sala(int capacidad, int númerosa, int númerosu, String rutEncargado,
-                int valorEntrada) {
-        this.capacidad = capacidad;
-        this.númerosa = númerosa;
-        this.númerosu = númerosu;
-        this.rutEncargado = rutEncargado;
-        this.valorEntrada = valorEntrada;
     }
 
 
@@ -27,20 +18,20 @@ public class Sala {
         this.capacidad = capacidad;
     }
 
-    public int getNúmerosa() {
-        return númerosa;
+    public int getNumerosa() {
+        return numerosa;
     }
 
-    public void setNúmerosa(int númerosa) {
-        this.númerosa = númerosa;
+    public void setNumerosa(int numerosa) {
+        this.numerosa = numerosa;
     }
 
-    public int getNúmerosu() {
-        return númerosu;
+    public int getNumerosu() {
+        return numerosu;
     }
 
-    public void setNúmerosu(int númerosu) {
-        this.númerosu = númerosu;
+    public void setNumerosu(int numerosu) {
+        this.numerosu = numerosu;
     }
 
     public String getRutEncargado() {
@@ -67,11 +58,11 @@ public class Sala {
         buffer.append("capacidad=");
         buffer.append(getCapacidad());
         buffer.append(',');
-        buffer.append("númerosa=");
-        buffer.append(getNúmerosa());
+        buffer.append("numerosa=");
+        buffer.append(getNumerosa());
         buffer.append(',');
-        buffer.append("númerosu=");
-        buffer.append(getNúmerosu());
+        buffer.append("numerosu=");
+        buffer.append(getNumerosu());
         buffer.append(',');
         buffer.append("rutEncargado=");
         buffer.append(getRutEncargado());

@@ -6,11 +6,6 @@ public class Rutina {
     public Rutina() {
     }
 
-    public Rutina(String actividad, String rute) {
-        this.actividad = actividad;
-        this.rute = rute;
-    }
-
     public String getActividad() {
         return actividad;
     }

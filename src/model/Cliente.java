@@ -7,11 +7,6 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nombre, String rutc) {
-        this.nombre = nombre;
-        this.rutc = rutc;
-    }
-
 
     public String getNombre() {
         return nombre;

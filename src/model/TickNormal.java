@@ -1,64 +1,54 @@
 package model;
 public class TickNormal {
-    private int códigoh;
-    private int códigopeli;
-    private int códigot;
-    private int númsala;
-    private int númsucur;
+    private int codigoh;
+    private int codigopeli;
+    private int codigot;
+    private int numsala;
+    private int numsucur;
     private String rutc;
 
     public TickNormal() {
     }
 
-    public TickNormal(int códigoh, int códigopeli, int códigot, int númsala,
-                      int númsucur, String rutc) {
-        this.códigoh = códigoh;
-        this.códigopeli = códigopeli;
-        this.códigot = códigot;
-        this.númsala = númsala;
-        this.númsucur = númsucur;
-        this.rutc = rutc;
+
+    public int getCodigoh() {
+        return codigoh;
     }
 
-
-    public int getCódigoh() {
-        return códigoh;
+    public void setCodigoh(int codigoh) {
+        this.codigoh = codigoh;
     }
 
-    public void setCódigoh(int códigoh) {
-        this.códigoh = códigoh;
+    public int getCodigopeli() {
+        return codigopeli;
     }
 
-    public int getCódigopeli() {
-        return códigopeli;
+    public void setCodigopeli(int codigopeli) {
+        this.codigopeli = codigopeli;
     }
 
-    public void setCódigopeli(int códigopeli) {
-        this.códigopeli = códigopeli;
+    public int getCodigot() {
+        return codigot;
     }
 
-    public int getCódigot() {
-        return códigot;
+    public void setCodigot(int codigot) {
+        this.codigot = codigot;
     }
 
-    public void setCódigot(int códigot) {
-        this.códigot = códigot;
+    public int getNumsala() {
+        return numsala;
     }
 
-    public int getNúmsala() {
-        return númsala;
+    public void setNumsala(int numsala) {
+        this.numsala = numsala;
     }
 
-    public void setNúmsala(int númsala) {
-        this.númsala = númsala;
+    public int getNumsucur() {
+        return numsucur;
     }
 
-    public int getNúmsucur() {
-        return númsucur;
-    }
-
-    public void setNúmsucur(int númsucur) {
-        this.númsucur = númsucur;
+    public void setNumsucur(int numsucur) {
+        this.numsucur = numsucur;
     }
 
     public String getRutc() {
@@ -74,20 +64,20 @@ public class TickNormal {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("códigoh=");
-        buffer.append(getCódigoh());
+        buffer.append("codigoh=");
+        buffer.append(getCodigoh());
         buffer.append(',');
-        buffer.append("códigopeli=");
-        buffer.append(getCódigopeli());
+        buffer.append("codigopeli=");
+        buffer.append(getCodigopeli());
         buffer.append(',');
-        buffer.append("códigot=");
-        buffer.append(getCódigot());
+        buffer.append("codigot=");
+        buffer.append(getCodigot());
         buffer.append(',');
-        buffer.append("númsala=");
-        buffer.append(getNúmsala());
+        buffer.append("numsala=");
+        buffer.append(getNumsala());
         buffer.append(',');
-        buffer.append("númsucur=");
-        buffer.append(getNúmsucur());
+        buffer.append("numsucur=");
+        buffer.append(getNumsucur());
         buffer.append(',');
         buffer.append("rutc=");
         buffer.append(getRutc());

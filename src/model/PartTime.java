@@ -6,11 +6,6 @@ public class PartTime {
     public PartTime() {
     }
 
-    public PartTime(int honorarioPorHora, String rute) {
-        this.honorarioPorHora = honorarioPorHora;
-        this.rute = rute;
-    }
-
     public int getHonorarioPorHora() {
         return honorarioPorHora;
     }

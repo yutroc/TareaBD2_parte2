@@ -1,31 +1,26 @@
 package model;
 public class PeliNormal {
-    private int código;
-    private String resolución;
+    private int codigo;
+    private String resolucion;
 
     public PeliNormal() {
     }
 
-    public PeliNormal(int código, String resolución) {
-        this.código = código;
-        this.resolución = resolución;
+
+    public int getCodigo() {
+        return codigo;
     }
 
-
-    public int getCódigo() {
-        return código;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
-    public void setCódigo(int código) {
-        this.código = código;
+    public String getResolucion() {
+        return resolucion;
     }
 
-    public String getResolución() {
-        return resolución;
-    }
-
-    public void setResolución(String resolución) {
-        this.resolución = resolución;
+    public void setResolucion(String resolucion) {
+        this.resolucion = resolucion;
     }
 
     @Override
@@ -33,11 +28,11 @@ public class PeliNormal {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("código=");
-        buffer.append(getCódigo());
+        buffer.append("codigo=");
+        buffer.append(getCodigo());
         buffer.append(',');
-        buffer.append("resolución=");
-        buffer.append(getResolución());
+        buffer.append("resolucion=");
+        buffer.append(getResolucion());
         buffer.append(']');
         return buffer.toString();
     }

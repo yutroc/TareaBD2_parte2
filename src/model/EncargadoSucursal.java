@@ -2,17 +2,10 @@ package model;
 public class EncargadoSucursal {
     private int fonoFijo;
     private int oficina;
-    private String profesión;
+    private String profesion;
     private String rute;
 
     public EncargadoSucursal() {
-    }
-
-    public EncargadoSucursal(int fonoFijo, int oficina, String profesión, String rute) {
-        this.fonoFijo = fonoFijo;
-        this.oficina = oficina;
-        this.profesión = profesión;
-        this.rute = rute;
     }
 
     public int getFonoFijo() {
@@ -31,12 +24,12 @@ public class EncargadoSucursal {
         this.oficina = oficina;
     }
 
-    public String getProfesión() {
-        return profesión;
+    public String getProfesion() {
+        return profesion;
     }
 
-    public void setProfesión(String profesión) {
-        this.profesión = profesión;
+    public void setProfesion(String profesion) {
+        this.profesion = profesion;
     }
 
     public String getRute() {
@@ -58,8 +51,8 @@ public class EncargadoSucursal {
         buffer.append("oficina=");
         buffer.append(getOficina());
         buffer.append(',');
-        buffer.append("profesión=");
-        buffer.append(getProfesión());
+        buffer.append("profesion=");
+        buffer.append(getProfesion());
         buffer.append(',');
         buffer.append("rute=");
         buffer.append(getRute());

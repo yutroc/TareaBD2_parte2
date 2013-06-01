@@ -1,33 +1,27 @@
 package model;
 public class SalaNormal {
-    private int númerosa;
-    private int númerosu;
+    private int numerosa;
+    private int numerosu;
     private String tipoSonido;
 
     public SalaNormal() {
     }
 
-    public SalaNormal(int númerosa, int númerosu, String tipoSonido) {
-        this.númerosa = númerosa;
-        this.númerosu = númerosu;
-        this.tipoSonido = tipoSonido;
+
+    public int getNumerosa() {
+        return numerosa;
     }
 
-
-    public int getNúmerosa() {
-        return númerosa;
+    public void setNumerosa(int numerosa) {
+        this.numerosa = numerosa;
     }
 
-    public void setNúmerosa(int númerosa) {
-        this.númerosa = númerosa;
+    public int getNumerosu() {
+        return numerosu;
     }
 
-    public int getNúmerosu() {
-        return númerosu;
-    }
-
-    public void setNúmerosu(int númerosu) {
-        this.númerosu = númerosu;
+    public void setNumerosu(int numerosu) {
+        this.numerosu = numerosu;
     }
 
     public String getTipoSonido() {
@@ -43,11 +37,11 @@ public class SalaNormal {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("númerosa=");
-        buffer.append(getNúmerosa());
+        buffer.append("numerosa=");
+        buffer.append(getNumerosa());
         buffer.append(',');
-        buffer.append("númerosu=");
-        buffer.append(getNúmerosu());
+        buffer.append("numerosu=");
+        buffer.append(getNumerosu());
         buffer.append(',');
         buffer.append("tipoSonido=");
         buffer.append(getTipoSonido());

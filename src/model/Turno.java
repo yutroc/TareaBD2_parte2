@@ -2,52 +2,44 @@ package model;
 import java.sql.Timestamp;
 
 public class Turno {
-    private int código;
-    private String día;
+    private int codigo;
+    private String dia;
     private Timestamp hEnt;
     private Timestamp hSal;
 
     public Turno() {
     }
 
-    public Turno(int código, String día, Timestamp hEnt, Timestamp hSal) {
-        this.código = código;
-        this.día = día;
-        this.hEnt = hEnt;
-        this.hSal = hSal;
+    public int getCodigo() {
+        return codigo;
     }
 
-
-    public int getCódigo() {
-        return código;
+    public void setCodigo(String codigo) {
+        this.codigo = Integer.parseInt(codigo);
     }
 
-    public void setCódigo(int código) {
-        this.código = código;
+    public String getDia() {
+        return dia;
     }
 
-    public String getDía() {
-        return día;
-    }
-
-    public void setDía(String día) {
-        this.día = día;
+    public void setDia(String dia) {
+        this.dia = dia;
     }
 
     public Timestamp getHEnt() {
         return hEnt;
     }
 
-    public void setHEnt(Timestamp hEnt) {
-        this.hEnt = hEnt;
+    public void setHEnt(String hEnt) {
+        this.hEnt = Mapper.toTime(hEnt);
     }
 
     public Timestamp getHSal() {
         return hSal;
     }
 
-    public void setHSal(Timestamp hSal) {
-        this.hSal = hSal;
+    public void setHSal(String hSal) {
+        this.hSal = Mapper.toTime(hSal);
     }
 
     @Override
@@ -55,11 +47,11 @@ public class Turno {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("código=");
-        buffer.append(getCódigo());
+        buffer.append("codigo=");
+        buffer.append(getCodigo());
         buffer.append(',');
-        buffer.append("día=");
-        buffer.append(getDía());
+        buffer.append("dia=");
+        buffer.append(getDia());
         buffer.append(',');
         buffer.append("hEnt=");
         buffer.append(getHEnt());

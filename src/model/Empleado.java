@@ -1,45 +1,36 @@
 package model;
 import java.sql.Date;
 
+import main.Main;
+
 public class Empleado {
-    private String dirección;
+    private String direccion;
     private Date fechaNacimiento;
     private String fono;
     private String mail;
     private String nombre;
-    private int númsucursal;
+    private Sucursal sucursal;
     private String rute;
     private String rutsupervisor;
+    private Empleado supervisor;
 
-    public Empleado() {
+	public Empleado() {
     }
 
-    public Empleado(String dirección, Date fechaNacimiento, String fono, String mail, String nombre,
-                    int númsucursal, String rute, String rutsupervisor) {
-        this.dirección = dirección;
-        this.fechaNacimiento = fechaNacimiento;
-        this.fono = fono;
-        this.mail = mail;
-        this.nombre = nombre;
-        this.númsucursal = númsucursal;
-        this.rute = rute;
-        this.rutsupervisor = rutsupervisor;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public String getDirección() {
-        return dirección;
-    }
-
-    public void setDirección(String dirección) {
-        this.dirección = dirección;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = Mapper.toDate(fechaNacimiento);
     }
 
     public String getFono() {
@@ -66,12 +57,17 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    public int getNúmsucursal() {
-        return númsucursal;
+    public Sucursal getNumsucursal() {
+        return sucursal;
     }
 
-    public void setNúmsucursal(int númsucursal) {
-        this.númsucursal = númsucursal;
+    public void setNumsucursal(String numsucursal) {
+    	
+    	Sucursal proto = new Sucursal();
+    	proto.setNumerosu(numsucursal);
+        Sucursal next = (Sucursal) Main.db.queryByExample(proto).next();
+        //System.out.println(next);
+		this.sucursal = next;
     }
 
     public String getRute() {
@@ -81,6 +77,14 @@ public class Empleado {
     public void setRute(String rute) {
         this.rute = rute;
     }
+
+    public Empleado getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(Empleado supervisor) {
+		this.supervisor = supervisor;
+	}
 
     public String getRutsupervisor() {
         return rutsupervisor;
@@ -95,8 +99,8 @@ public class Empleado {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("dirección=");
-        buffer.append(getDirección());
+        buffer.append("direccion=");
+        buffer.append(getDireccion());
         buffer.append(',');
         buffer.append("fechaNacimiento=");
         buffer.append(getFechaNacimiento());
@@ -110,8 +114,8 @@ public class Empleado {
         buffer.append("nombre=");
         buffer.append(getNombre());
         buffer.append(',');
-        buffer.append("númsucursal=");
-        buffer.append(getNúmsucursal());
+        buffer.append("numsucursal=");
+        buffer.append(getNumsucursal());
         buffer.append(',');
         buffer.append("rute=");
         buffer.append(getRute());

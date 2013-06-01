@@ -2,9 +2,9 @@ package model;
 import java.sql.Date;
 
 public class Descuento {
-    private int códigoca;
-    private int códigod;
-    private int duración;
+    private int codigoca;
+    private int codigod;
+    private int duracion;
     private Date fechaInicio;
     private double porcentaje;
     private String rutcliente;
@@ -12,39 +12,29 @@ public class Descuento {
     public Descuento() {
     }
 
-    public Descuento(int códigoca, int códigod, int duración, Date fechaInicio, double porcentaje,
-                     String rutcliente) {
-        this.códigoca = códigoca;
-        this.códigod = códigod;
-        this.duración = duración;
-        this.fechaInicio = fechaInicio;
-        this.porcentaje = porcentaje;
-        this.rutcliente = rutcliente;
+
+    public int getCodigoca() {
+        return codigoca;
     }
 
-
-    public int getCódigoca() {
-        return códigoca;
+    public void setCodigoca(int codigoca) {
+        this.codigoca = codigoca;
     }
 
-    public void setCódigoca(int códigoca) {
-        this.códigoca = códigoca;
+    public int getCodigod() {
+        return codigod;
     }
 
-    public int getCódigod() {
-        return códigod;
+    public void setCodigod(int codigod) {
+        this.codigod = codigod;
     }
 
-    public void setCódigod(int códigod) {
-        this.códigod = códigod;
+    public int getDuracion() {
+        return duracion;
     }
 
-    public int getDuración() {
-        return duración;
-    }
-
-    public void setDuración(int duración) {
-        this.duración = duración;
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
     }
 
     public Date getFechaInicio() {
@@ -76,14 +66,14 @@ public class Descuento {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("códigoca=");
-        buffer.append(getCódigoca());
+        buffer.append("codigoca=");
+        buffer.append(getCodigoca());
         buffer.append(',');
-        buffer.append("códigod=");
-        buffer.append(getCódigod());
+        buffer.append("codigod=");
+        buffer.append(getCodigod());
         buffer.append(',');
-        buffer.append("duración=");
-        buffer.append(getDuración());
+        buffer.append("duracion=");
+        buffer.append(getDuracion());
         buffer.append(',');
         buffer.append("fechaInicio=");
         buffer.append(getFechaInicio());

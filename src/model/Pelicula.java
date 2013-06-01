@@ -3,40 +3,30 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Pelicula {
-    private String clasificación;
-    private int código;
+    private String clasificacion;
+    private int codigo;
     private String director;
-    private Timestamp duración;
+    private Timestamp duracion;
     private Date fechaEstreno;
-    private String título;
+    private String titulo;
 
     public Pelicula() {
     }
 
-    public Pelicula(String clasificación, int código, String director, Timestamp duración, Date fechaEstreno,
-                    String título) {
-        this.clasificación = clasificación;
-        this.código = código;
-        this.director = director;
-        this.duración = duración;
-        this.fechaEstreno = fechaEstreno;
-        this.título = título;
+    public String getClasificacion() {
+        return clasificacion;
     }
 
-    public String getClasificación() {
-        return clasificación;
+    public void setClasificacion(String clasificacion) {
+        this.clasificacion = clasificacion;
     }
 
-    public void setClasificación(String clasificación) {
-        this.clasificación = clasificación;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public int getCódigo() {
-        return código;
-    }
-
-    public void setCódigo(int código) {
-        this.código = código;
+    public void setCodigo(String codigo) {
+        this.codigo = Integer.parseInt(codigo);
     }
 
     public String getDirector() {
@@ -47,28 +37,28 @@ public class Pelicula {
         this.director = director;
     }
 
-    public Timestamp getDuración() {
-        return duración;
+    public Timestamp getDuracion() {
+        return duracion;
     }
 
-    public void setDuración(Timestamp duración) {
-        this.duración = duración;
+    public void setDuracion(String duracion) {
+        this.duracion = Mapper.toTime(duracion);
     }
 
     public Date getFechaEstreno() {
         return fechaEstreno;
     }
 
-    public void setFechaEstreno(Date fechaEstreno) {
-        this.fechaEstreno = fechaEstreno;
+    public void setFechaEstreno(String fechaEstreno) {
+        this.fechaEstreno = Mapper.toDate(fechaEstreno);
     }
 
-    public String getTítulo() {
-        return título;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTítulo(String título) {
-        this.título = título;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     @Override
@@ -76,23 +66,23 @@ public class Pelicula {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("clasificación=");
-        buffer.append(getClasificación());
+        buffer.append("clasificacion=");
+        buffer.append(getClasificacion());
         buffer.append(',');
-        buffer.append("código=");
-        buffer.append(getCódigo());
+        buffer.append("codigo=");
+        buffer.append(getCodigo());
         buffer.append(',');
         buffer.append("director=");
         buffer.append(getDirector());
         buffer.append(',');
-        buffer.append("duración=");
-        buffer.append(getDuración());
+        buffer.append("duracion=");
+        buffer.append(getDuracion());
         buffer.append(',');
         buffer.append("fechaEstreno=");
         buffer.append(getFechaEstreno());
         buffer.append(',');
-        buffer.append("título=");
-        buffer.append(getTítulo());
+        buffer.append("titulo=");
+        buffer.append(getTitulo());
         buffer.append(']');
         return buffer.toString();
     }

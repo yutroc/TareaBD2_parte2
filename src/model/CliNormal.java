@@ -7,11 +7,6 @@ public class CliNormal {
     public CliNormal() {
     }
 
-    public CliNormal(String mail, String rutc) {
-        this.mail = mail;
-        this.rutc = rutc;
-    }
-
     public String getMail() {
         return mail;
     }

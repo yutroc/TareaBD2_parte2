@@ -1,6 +1,6 @@
 package model;
 public class ComercioAsociado {
-    private int códigoca;
+    private int codigoca;
     private String nombre;
     private String rubro;
     private String rutadmin;
@@ -8,20 +8,13 @@ public class ComercioAsociado {
     public ComercioAsociado() {
     }
 
-    public ComercioAsociado(int códigoca, String nombre, String rubro, String rutadmin) {
-        this.códigoca = códigoca;
-        this.nombre = nombre;
-        this.rubro = rubro;
-        this.rutadmin = rutadmin;
+
+    public int getCodigoca() {
+        return codigoca;
     }
 
-
-    public int getCódigoca() {
-        return códigoca;
-    }
-
-    public void setCódigoca(int códigoca) {
-        this.códigoca = códigoca;
+    public void setCodigoca(int codigoca) {
+        this.codigoca = codigoca;
     }
 
     public String getNombre() {
@@ -53,8 +46,8 @@ public class ComercioAsociado {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("códigoca=");
-        buffer.append(getCódigoca());
+        buffer.append("codigoca=");
+        buffer.append(getCodigoca());
         buffer.append(',');
         buffer.append("nombre=");
         buffer.append(getNombre());

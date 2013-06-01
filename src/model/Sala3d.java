@@ -1,16 +1,10 @@
 package model;
 public class Sala3d {
     private int numLentes;
-    private int númerosa;
-    private int númerosu;
+    private int numerosa;
+    private int numerosu;
 
     public Sala3d() {
-    }
-
-    public Sala3d(int numLentes, int númerosa, int númerosu) {
-        this.numLentes = numLentes;
-        this.númerosa = númerosa;
-        this.númerosu = númerosu;
     }
 
     public int getNumLentes() {
@@ -21,20 +15,20 @@ public class Sala3d {
         this.numLentes = numLentes;
     }
 
-    public int getNúmerosa() {
-        return númerosa;
+    public int getNumerosa() {
+        return numerosa;
     }
 
-    public void setNúmerosa(int númerosa) {
-        this.númerosa = númerosa;
+    public void setNumerosa(int numerosa) {
+        this.numerosa = numerosa;
     }
 
-    public int getNúmerosu() {
-        return númerosu;
+    public int getNumerosu() {
+        return numerosu;
     }
 
-    public void setNúmerosu(int númerosu) {
-        this.númerosu = númerosu;
+    public void setNumerosu(int numerosu) {
+        this.numerosu = numerosu;
     }
 
     @Override
@@ -45,11 +39,11 @@ public class Sala3d {
         buffer.append("numLentes=");
         buffer.append(getNumLentes());
         buffer.append(',');
-        buffer.append("númerosa=");
-        buffer.append(getNúmerosa());
+        buffer.append("numerosa=");
+        buffer.append(getNumerosa());
         buffer.append(',');
-        buffer.append("númerosu=");
-        buffer.append(getNúmerosu());
+        buffer.append("numerosu=");
+        buffer.append(getNumerosu());
         buffer.append(']');
         return buffer.toString();
     }

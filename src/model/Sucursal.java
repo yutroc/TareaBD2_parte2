@@ -1,25 +1,15 @@
 package model;
 public class Sucursal {
-    private String calle;
+	
+	private String calle;
     private String comuna;
     private String nombre;
-    private int númerocalle;
-    private int númerosu;
-    private String región;
-    private String rutEncargado;
+    private int numerocalle;
+    private int numerosu;
+    private String region;
+    private EncargadoSucursal encargado;
 
     public Sucursal() {
-    }
-
-    public Sucursal(String calle, String comuna, String nombre, int númerocalle, int númerosu,
-                    String región, String rutEncargado) {
-        this.calle = calle;
-        this.comuna = comuna;
-        this.nombre = nombre;
-        this.númerocalle = númerocalle;
-        this.númerosu = númerosu;
-        this.región = región;
-        this.rutEncargado = rutEncargado;
     }
 
     public String getCalle() {
@@ -46,37 +36,42 @@ public class Sucursal {
         this.nombre = nombre;
     }
 
-    public int getNúmerocalle() {
-        return númerocalle;
+    public int getNumerocalle() {
+        return numerocalle;
     }
 
-    public void setNúmerocalle(int númerocalle) {
-        this.númerocalle = númerocalle;
+    public void setNumerocalle(String numerocalle) {
+        this.numerocalle = Integer.parseInt(numerocalle);
     }
 
-    public int getNúmerosu() {
-        return númerosu;
+    public int getNumerosu() {
+        return numerosu;
     }
 
-    public void setNúmerosu(int númerosu) {
-        this.númerosu = númerosu;
+    public void setNumerosu(String numerosu) {
+        this.numerosu = Integer.parseInt(numerosu);
     }
 
-    public String getRegión() {
-        return región;
+    public String getRegion() {
+        return region;
     }
 
-    public void setRegión(String región) {
-        this.región = región;
+    public void setRegion(String region) {
+        this.region = region;
+    }
+    
+    public void setRutEncargado(String r){
+    	
     }
 
-    public String getRutEncargado() {
-        return rutEncargado;
-    }
+    public EncargadoSucursal getEncargado() {
+		return encargado;
+	}
 
-    public void setRutEncargado(String rutEncargado) {
-        this.rutEncargado = rutEncargado;
-    }
+	public void setEncargado(EncargadoSucursal encargado) {
+		this.encargado = encargado;
+	}
+
 
     @Override
     public String toString() {
@@ -92,17 +87,17 @@ public class Sucursal {
         buffer.append("nombre=");
         buffer.append(getNombre());
         buffer.append(',');
-        buffer.append("númerocalle=");
-        buffer.append(getNúmerocalle());
+        buffer.append("numerocalle=");
+        buffer.append(getNumerocalle());
         buffer.append(',');
-        buffer.append("númerosu=");
-        buffer.append(getNúmerosu());
+        buffer.append("numerosu=");
+        buffer.append(getNumerosu());
         buffer.append(',');
-        buffer.append("región=");
-        buffer.append(getRegión());
+        buffer.append("region=");
+        buffer.append(getRegion());
         buffer.append(',');
         buffer.append("rutEncargado=");
-        buffer.append(getRutEncargado());
+        buffer.append(getEncargado());
         buffer.append(']');
         return buffer.toString();
     }

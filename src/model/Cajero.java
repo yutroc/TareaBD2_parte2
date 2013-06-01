@@ -6,11 +6,6 @@ public class Cajero {
     public Cajero() {
     }
 
-    public Cajero(String antecedentes, String rute) {
-        this.antecedentes = antecedentes;
-        this.rute = rute;
-    }
-
 
     public String getAntecedentes() {
         return antecedentes;

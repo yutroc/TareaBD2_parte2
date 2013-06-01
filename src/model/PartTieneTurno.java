@@ -1,23 +1,18 @@
 package model;
 public class PartTieneTurno {
-    private int códigoturno;
+    private int codigoturno;
     private String rute;
 
     public PartTieneTurno() {
     }
 
-    public PartTieneTurno(int códigoturno, String rute) {
-        this.códigoturno = códigoturno;
-        this.rute = rute;
+
+    public int getCodigoturno() {
+        return codigoturno;
     }
 
-
-    public int getCódigoturno() {
-        return códigoturno;
-    }
-
-    public void setCódigoturno(int códigoturno) {
-        this.códigoturno = códigoturno;
+    public void setCodigoturno(int codigoturno) {
+        this.codigoturno = codigoturno;
     }
 
     public String getRute() {
@@ -33,8 +28,8 @@ public class PartTieneTurno {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("códigoturno=");
-        buffer.append(getCódigoturno());
+        buffer.append("codigoturno=");
+        buffer.append(getCodigoturno());
         buffer.append(',');
         buffer.append("rute=");
         buffer.append(getRute());

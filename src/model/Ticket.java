@@ -2,8 +2,8 @@ package model;
 import java.sql.Date;
 
 public class Ticket {
-    private int códigoti;
-    private int dctoPorDía;
+    private int codigoti;
+    private int dctoPorDia;
     private Date fechaCompra;
     private Date horaCompra;
     private String rutcajero;
@@ -11,29 +11,21 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(int códigoti, int dctoPorDía, Date fechaCompra, Date horaCompra, String rutcajero) {
-        this.códigoti = códigoti;
-        this.dctoPorDía = dctoPorDía;
-        this.fechaCompra = fechaCompra;
-        this.horaCompra = horaCompra;
-        this.rutcajero = rutcajero;
+
+    public int getCodigoti() {
+        return codigoti;
     }
 
-
-    public int getCódigoti() {
-        return códigoti;
+    public void setCodigoti(int codigoti) {
+        this.codigoti = codigoti;
     }
 
-    public void setCódigoti(int códigoti) {
-        this.códigoti = códigoti;
+    public int getDctoPorDia() {
+        return dctoPorDia;
     }
 
-    public int getDctoPorDía() {
-        return dctoPorDía;
-    }
-
-    public void setDctoPorDía(int dctoPorDía) {
-        this.dctoPorDía = dctoPorDía;
+    public void setDctoPorDia(int dctoPorDia) {
+        this.dctoPorDia = dctoPorDia;
     }
 
     public Date getFechaCompra() {
@@ -65,11 +57,11 @@ public class Ticket {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("códigoti=");
-        buffer.append(getCódigoti());
+        buffer.append("codigoti=");
+        buffer.append(getCodigoti());
         buffer.append(',');
-        buffer.append("dctoPorDía=");
-        buffer.append(getDctoPorDía());
+        buffer.append("dctoPorDia=");
+        buffer.append(getDctoPorDia());
         buffer.append(',');
         buffer.append("fechaCompra=");
         buffer.append(getFechaCompra());

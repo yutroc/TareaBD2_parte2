@@ -10,12 +10,6 @@ public class CliFrecuente {
     public CliFrecuente() {
     }
 
-    public CliFrecuente(String celular, Date fechaNacimiento, String rutc) {
-        this.celular = celular;
-        this.fechaNacimiento = fechaNacimiento;
-        this.rutc = rutc;
-    }
-
     public String getCelular() {
         return celular;
     }

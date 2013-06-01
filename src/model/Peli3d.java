@@ -1,23 +1,18 @@
 package model;
 public class Peli3d {
-    private int código;
+    private int codigo;
     private String espacioDeColores;
 
     public Peli3d() {
     }
 
-    public Peli3d(int código, String espacioDeColores) {
-        this.código = código;
-        this.espacioDeColores = espacioDeColores;
+
+    public int getCodigo() {
+        return codigo;
     }
 
-
-    public int getCódigo() {
-        return código;
-    }
-
-    public void setCódigo(int código) {
-        this.código = código;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public String getEspacioDeColores() {
@@ -33,8 +28,8 @@ public class Peli3d {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("código=");
-        buffer.append(getCódigo());
+        buffer.append("codigo=");
+        buffer.append(getCodigo());
         buffer.append(',');
         buffer.append("espacioDeColores=");
         buffer.append(getEspacioDeColores());

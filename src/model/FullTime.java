@@ -7,12 +7,6 @@ public class FullTime {
     public FullTime() {
     }
 
-    public FullTime(int bono, String rute, int sueldo) {
-        this.bono = bono;
-        this.rute = rute;
-        this.sueldo = sueldo;
-    }
-
 
     public int getBono() {
         return bono;

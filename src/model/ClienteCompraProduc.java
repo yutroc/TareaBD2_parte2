@@ -4,16 +4,10 @@ import java.sql.Date;
 
 public class ClienteCompraProduc {
     private Date fecha;
-    private String númproducto;
+    private String numproducto;
     private String rutcliente;
 
     public ClienteCompraProduc() {
-    }
-
-    public ClienteCompraProduc(Date fecha, String númproducto, String rutcliente) {
-        this.fecha = fecha;
-        this.númproducto = númproducto;
-        this.rutcliente = rutcliente;
     }
 
 
@@ -25,12 +19,12 @@ public class ClienteCompraProduc {
         this.fecha = fecha;
     }
 
-    public String getNúmproducto() {
-        return númproducto;
+    public String getNumproducto() {
+        return numproducto;
     }
 
-    public void setNúmproducto(String númproducto) {
-        this.númproducto = númproducto;
+    public void setNumproducto(String numproducto) {
+        this.numproducto = numproducto;
     }
 
     public String getRutcliente() {
@@ -49,8 +43,8 @@ public class ClienteCompraProduc {
         buffer.append("fecha=");
         buffer.append(getFecha());
         buffer.append(',');
-        buffer.append("númproducto=");
-        buffer.append(getNúmproducto());
+        buffer.append("numproducto=");
+        buffer.append(getNumproducto());
         buffer.append(',');
         buffer.append("rutcliente=");
         buffer.append(getRutcliente());

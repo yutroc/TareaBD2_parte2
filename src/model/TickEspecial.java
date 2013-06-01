@@ -1,11 +1,11 @@
 package model;
 public class TickEspecial {
-    private int códigoh;
-    private int códigopeli;
-    private int códigot;
+    private int codigoh;
+    private int codigopeli;
+    private int codigot;
     private String formaCompra;
-    private int númsala;
-    private int númsucur;
+    private int numsala;
+    private int numsucur;
     private String premium;
     private int puntoSumado;
     private String rutc;
@@ -13,42 +13,29 @@ public class TickEspecial {
     public TickEspecial() {
     }
 
-    public TickEspecial(int códigoh, int códigopeli, int códigot, String formaCompra,
-                        int númsala, int númsucur, String premium, int puntoSumado, String rutc) {
-        this.códigoh = códigoh;
-        this.códigopeli = códigopeli;
-        this.códigot = códigot;
-        this.formaCompra = formaCompra;
-        this.númsala = númsala;
-        this.númsucur = númsucur;
-        this.premium = premium;
-        this.puntoSumado = puntoSumado;
-        this.rutc = rutc;
+
+    public int getCodigoh() {
+        return codigoh;
     }
 
-
-    public int getCódigoh() {
-        return códigoh;
+    public void setCodigoh(int codigoh) {
+        this.codigoh = codigoh;
     }
 
-    public void setCódigoh(int códigoh) {
-        this.códigoh = códigoh;
+    public int getCodigopeli() {
+        return codigopeli;
     }
 
-    public int getCódigopeli() {
-        return códigopeli;
+    public void setCodigopeli(int codigopeli) {
+        this.codigopeli = codigopeli;
     }
 
-    public void setCódigopeli(int códigopeli) {
-        this.códigopeli = códigopeli;
+    public int getCodigot() {
+        return codigot;
     }
 
-    public int getCódigot() {
-        return códigot;
-    }
-
-    public void setCódigot(int códigot) {
-        this.códigot = códigot;
+    public void setCodigot(int codigot) {
+        this.codigot = codigot;
     }
 
     public String getFormaCompra() {
@@ -59,20 +46,20 @@ public class TickEspecial {
         this.formaCompra = formaCompra;
     }
 
-    public int getNúmsala() {
-        return númsala;
+    public int getNumsala() {
+        return numsala;
     }
 
-    public void setNúmsala(int númsala) {
-        this.númsala = númsala;
+    public void setNumsala(int numsala) {
+        this.numsala = numsala;
     }
 
-    public int getNúmsucur() {
-        return númsucur;
+    public int getNumsucur() {
+        return numsucur;
     }
 
-    public void setNúmsucur(int númsucur) {
-        this.númsucur = númsucur;
+    public void setNumsucur(int numsucur) {
+        this.numsucur = numsucur;
     }
 
     public String getPremium() {
@@ -104,23 +91,23 @@ public class TickEspecial {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
         buffer.append('[');
-        buffer.append("códigoh=");
-        buffer.append(getCódigoh());
+        buffer.append("codigoh=");
+        buffer.append(getCodigoh());
         buffer.append(',');
-        buffer.append("códigopeli=");
-        buffer.append(getCódigopeli());
+        buffer.append("codigopeli=");
+        buffer.append(getCodigopeli());
         buffer.append(',');
-        buffer.append("códigot=");
-        buffer.append(getCódigot());
+        buffer.append("codigot=");
+        buffer.append(getCodigot());
         buffer.append(',');
         buffer.append("formaCompra=");
         buffer.append(getFormaCompra());
         buffer.append(',');
-        buffer.append("númsala=");
-        buffer.append(getNúmsala());
+        buffer.append("numsala=");
+        buffer.append(getNumsala());
         buffer.append(',');
-        buffer.append("númsucur=");
-        buffer.append(getNúmsucur());
+        buffer.append("numsucur=");
+        buffer.append(getNumsucur());
         buffer.append(',');
         buffer.append("premium=");
         buffer.append(getPremium());
