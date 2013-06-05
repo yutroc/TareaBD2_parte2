@@ -8,6 +8,7 @@ public class Sucursal {
     private int numerosu;
     private String region;
     private EncargadoSucursal encargado;
+	private String rutEncargado;
 
     public Sucursal() {
     }
@@ -61,7 +62,7 @@ public class Sucursal {
     }
     
     public void setRutEncargado(String r){
-    	
+    	this.rutEncargado = r;
     }
 
     public EncargadoSucursal getEncargado() {

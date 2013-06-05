@@ -33,6 +33,7 @@ public class Mapper {
 
 		for (File file : listOfFiles) {
 			String classname = capitalize(file.getName());
+			
 			try {
 				csv = new CSVReader(new FileReader(file.getAbsolutePath()));
 				String[] cabecera = csv.readNext();
@@ -113,7 +114,8 @@ public class Mapper {
 	}
 
 	public static Date toDate(String fechas) {
-		SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
+		//System.out.println(fechas);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			return new Date(format.parse(fechas).getTime());
 		} catch (ParseException e) {

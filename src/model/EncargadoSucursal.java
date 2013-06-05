@@ -4,6 +4,8 @@ public class EncargadoSucursal {
     private int oficina;
     private String profesion;
     private String rute;
+    private Empleado empleado;
+    private Sucursal sucursal;
 
     public EncargadoSucursal() {
     }
@@ -12,16 +14,16 @@ public class EncargadoSucursal {
         return fonoFijo;
     }
 
-    public void setFonoFijo(int fonoFijo) {
-        this.fonoFijo = fonoFijo;
+    public void setFonoFijo(String fonoFijo) {
+        this.fonoFijo = Integer.parseInt(fonoFijo);
     }
 
     public int getOficina() {
         return oficina;
     }
 
-    public void setOficina(int oficina) {
-        this.oficina = oficina;
+    public void setOficina(String oficina) {
+        this.oficina = Integer.parseInt(oficina);
     }
 
     public String getProfesion() {
@@ -40,7 +42,23 @@ public class EncargadoSucursal {
         this.rute = rute;
     }
 
-    @Override
+    public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
+
+	public Sucursal getSucursal() {
+		return sucursal;
+	}
+
+	public void setSucursal(Sucursal sucursal) {
+		this.sucursal = sucursal;
+	}
+
+	@Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));
