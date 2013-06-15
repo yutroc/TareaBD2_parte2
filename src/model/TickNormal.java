@@ -15,40 +15,40 @@ public class TickNormal {
         return codigoh;
     }
 
-    public void setCodigoh(int codigoh) {
-        this.codigoh = codigoh;
+    public void setCodigoh(String codigoh) {
+        this.codigoh = Integer.parseInt(codigoh);
     }
 
     public int getCodigopeli() {
         return codigopeli;
     }
 
-    public void setCodigopeli(int codigopeli) {
-        this.codigopeli = codigopeli;
+    public void setCodigopeli(String codigopeli) {
+        this.codigopeli =Integer.parseInt( codigopeli);
     }
 
     public int getCodigot() {
         return codigot;
     }
 
-    public void setCodigot(int codigot) {
-        this.codigot = codigot;
+    public void setCodigot(String codigot) {
+        this.codigot = Integer.parseInt(codigot);
     }
 
     public int getNumsala() {
         return numsala;
     }
 
-    public void setNumsala(int numsala) {
-        this.numsala = numsala;
+    public void setNumsala(String numsala) {
+        this.numsala =Integer.parseInt( numsala);
     }
 
     public int getNumsucur() {
         return numsucur;
     }
 
-    public void setNumsucur(int numsucur) {
-        this.numsucur = numsucur;
+    public void setNumsucur(String numsucur) {
+        this.numsucur = Integer.parseInt(numsucur);
     }
 
     public String getRutc() {

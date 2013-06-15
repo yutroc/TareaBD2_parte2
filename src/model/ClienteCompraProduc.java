@@ -15,8 +15,8 @@ public class ClienteCompraProduc {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFecha(String fecha) {
+        this.fecha = Mapper.toDate(fecha);
     }
 
     public String getNumproducto() {

@@ -17,40 +17,40 @@ public class Descuento {
         return codigoca;
     }
 
-    public void setCodigoca(int codigoca) {
-        this.codigoca = codigoca;
+    public void setCodigoca(String codigoca) {
+        this.codigoca = Integer.parseInt(codigoca);
     }
 
     public int getCodigod() {
         return codigod;
     }
 
-    public void setCodigod(int codigod) {
-        this.codigod = codigod;
+    public void setCodigod(String codigod) {
+        this.codigod = Integer.parseInt(codigod);
     }
 
     public int getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(int duracion) {
-        this.duracion = duracion;
+    public void setDuracion(String duracion) {
+        this.duracion = Integer.parseInt(duracion);
     }
 
     public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = Mapper.toDate(fechaInicio) ;
     }
 
     public double getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(double porcentaje) {
-        this.porcentaje = porcentaje;
+    public void setPorcentaje(String porcentaje) {
+        this.porcentaje = Double.parseDouble(porcentaje.replace("," ,"." ));
     }
 
     public String getRutcliente() {

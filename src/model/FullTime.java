@@ -12,8 +12,8 @@ public class FullTime {
         return bono;
     }
 
-    public void setBono(int bono) {
-        this.bono = bono;
+    public void setBono(String bono) {
+        this.bono = Integer.parseInt(bono);
     }
 
     public String getRute() {
@@ -28,8 +28,8 @@ public class FullTime {
         return sueldo;
     }
 
-    public void setSueldo(int sueldo) {
-        this.sueldo = sueldo;
+    public void setSueldo(String sueldo) {
+        this.sueldo =  Integer.parseInt(sueldo);
     }
 
     @Override

@@ -68,7 +68,7 @@ public class Mapper {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Done");
+		System.out.println("Done - " + sFolder);
 	}
 
 	private static Constructor<?> getConstructor(Class clasetabla, String[] row) {

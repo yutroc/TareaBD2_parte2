@@ -11,8 +11,8 @@ public class PeliNormal {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCodigo(String codigo) {
+        this.codigo = Integer.parseInt(codigo);
     }
 
     public String getResolucion() {

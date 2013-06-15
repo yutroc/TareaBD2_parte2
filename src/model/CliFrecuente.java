@@ -6,6 +6,7 @@ public class CliFrecuente {
     private String celular;
     private Date fechaNacimiento;
     private String rutc;
+    private Cliente cliente;
 
     public CliFrecuente() {
     }
@@ -22,8 +23,8 @@ public class CliFrecuente {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = Mapper.toDate(fechaNacimiento);
     }
 
     public String getRutc() {
@@ -50,4 +51,12 @@ public class CliFrecuente {
         buffer.append(']');
         return buffer.toString();
     }
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 }

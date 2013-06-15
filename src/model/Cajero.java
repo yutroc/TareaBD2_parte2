@@ -2,6 +2,7 @@ package model;
 public class Cajero {
     private String antecedentes;
     private String rute;
+    private Empleado empleado;
 
     public Cajero() {
     }
@@ -36,4 +37,14 @@ public class Cajero {
         buffer.append(']');
         return buffer.toString();
     }
+
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
 }

@@ -11,8 +11,8 @@ public class PartTieneTurno {
         return codigoturno;
     }
 
-    public void setCodigoturno(int codigoturno) {
-        this.codigoturno = codigoturno;
+    public void setCodigoturno(String codigoturno) {
+        this.codigoturno = Integer.parseInt(codigoturno);
     }
 
     public String getRute() {

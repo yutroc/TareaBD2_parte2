@@ -2,6 +2,7 @@ package model;
 public class PartTime {
     private int honorarioPorHora;
     private String rute;
+    private Empleado empleado;
 
     public PartTime() {
     }
@@ -10,8 +11,8 @@ public class PartTime {
         return honorarioPorHora;
     }
 
-    public void setHonorarioPorHora(int honorarioPorHora) {
-        this.honorarioPorHora = honorarioPorHora;
+    public void setHonorarioPorHora(String honorarioPorHora) {
+        this.honorarioPorHora = Integer.parseInt(honorarioPorHora);
     }
 
     public String getRute() {
@@ -22,7 +23,15 @@ public class PartTime {
         this.rute = rute;
     }
 
-    @Override
+    public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
+
+	@Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getClass().getName()+"@"+Integer.toHexString(hashCode()));

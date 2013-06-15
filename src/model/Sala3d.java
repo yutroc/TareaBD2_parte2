@@ -11,24 +11,24 @@ public class Sala3d {
         return numLentes;
     }
 
-    public void setNumLentes(int numLentes) {
-        this.numLentes = numLentes;
+    public void setNumLentes(String numLentes) {
+        this.numLentes = Integer.parseInt(numLentes);
     }
 
     public int getNumerosa() {
         return numerosa;
     }
 
-    public void setNumerosa(int numerosa) {
-        this.numerosa = numerosa;
+    public void setNumerosa(String numerosa) {
+        this.numerosa = Integer.parseInt(numerosa);
     }
 
     public int getNumerosu() {
         return numerosu;
     }
 
-    public void setNumerosu(int numerosu) {
-        this.numerosu = numerosu;
+    public void setNumerosu(String numerosu) {
+        this.numerosu = Integer.parseInt(numerosu);
     }
 
     @Override

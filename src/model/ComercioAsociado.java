@@ -13,8 +13,8 @@ public class ComercioAsociado {
         return codigoca;
     }
 
-    public void setCodigoca(int codigoca) {
-        this.codigoca = codigoca;
+    public void setCodigoca(String codigoca) {
+        this.codigoca = Integer.parseInt(codigoca);
     }
 
     public String getNombre() {

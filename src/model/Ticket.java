@@ -1,11 +1,12 @@
 package model;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Ticket {
     private int codigoti;
     private int dctoPorDia;
     private Date fechaCompra;
-    private Date horaCompra;
+    private Timestamp horaCompra;
     private String rutcajero;
 
     public Ticket() {
@@ -16,32 +17,32 @@ public class Ticket {
         return codigoti;
     }
 
-    public void setCodigoti(int codigoti) {
-        this.codigoti = codigoti;
+    public void setCodigoti(String codigoti) {
+        this.codigoti = Integer.parseInt(codigoti);
     }
 
     public int getDctoPorDia() {
         return dctoPorDia;
     }
 
-    public void setDctoPorDia(int dctoPorDia) {
-        this.dctoPorDia = dctoPorDia;
+    public void setDctoPorDia(String dctoPorDia) {
+        this.dctoPorDia = Integer.parseInt(dctoPorDia);
     }
 
     public Date getFechaCompra() {
         return fechaCompra;
     }
 
-    public void setFechaCompra(Date fechaCompra) {
-        this.fechaCompra = fechaCompra;
+    public void setFechaCompra(String fechaCompra) {
+        this.fechaCompra = Mapper.toDate(fechaCompra);
     }
 
-    public Date getHoraCompra() {
+    public Timestamp getHoraCompra() {
         return horaCompra;
     }
 
-    public void setHoraCompra(Date horaCompra) {
-        this.horaCompra = horaCompra;
+    public void setHoraCompra(String horaCompra) {
+        this.horaCompra = Mapper.toTime(horaCompra);
     }
 
     public String getRutcajero() {

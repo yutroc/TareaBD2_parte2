@@ -22,8 +22,8 @@ public class Producto {
         return codigoca;
     }
 
-    public void setCodigoca(int codigoca) {
-        this.codigoca = codigoca;
+    public void setCodigoca(String codigoca) {
+        this.codigoca = Integer.parseInt(codigoca);
     }
 
     public String getNombre() {
@@ -38,24 +38,24 @@ public class Producto {
         return numero;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setNumero(String numero) {
+        this.numero = Integer.parseInt(numero);
     }
 
     public int getValorEnPesos() {
         return valorEnPesos;
     }
 
-    public void setValorEnPesos(int valorEnPesos) {
-        this.valorEnPesos = valorEnPesos;
+    public void setValorEnPesos(String valorEnPesos) {
+        this.valorEnPesos = Integer.parseInt(valorEnPesos);
     }
 
     public int getValorEnPuntos() {
         return valorEnPuntos;
     }
 
-    public void setValorEnPuntos(int valorEnPuntos) {
-        this.valorEnPuntos = valorEnPuntos;
+    public void setValorEnPuntos(String valorEnPuntos) {
+        this.valorEnPuntos = Integer.parseInt(valorEnPuntos);
     }
 
     @Override

@@ -14,24 +14,24 @@ public class Sala {
         return capacidad;
     }
 
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
+    public void setCapacidad(String capacidad) {
+        this.capacidad = Integer.parseInt(capacidad);
     }
 
     public int getNumerosa() {
         return numerosa;
     }
 
-    public void setNumerosa(int numerosa) {
-        this.numerosa = numerosa;
+    public void setNumerosa(String numerosa) {
+        this.numerosa = Integer.parseInt(numerosa);
     }
 
     public int getNumerosu() {
         return numerosu;
     }
 
-    public void setNumerosu(int numerosu) {
-        this.numerosu = numerosu;
+    public void setNumerosu(String numerosu) {
+        this.numerosu = Integer.parseInt(numerosu);
     }
 
     public String getRutEncargado() {
@@ -46,8 +46,8 @@ public class Sala {
         return valorEntrada;
     }
 
-    public void setValorEntrada(int valorEntrada) {
-        this.valorEntrada = valorEntrada;
+    public void setValorEntrada(String valorEntrada) {
+        this.valorEntrada = Integer.parseInt(valorEntrada);
     }
 
     @Override
