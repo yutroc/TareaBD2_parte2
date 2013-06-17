@@ -5,9 +5,12 @@ public class TickNormal {
     private int codigot;
     private int numsala;
     private int numsucur;
+    private Pelicula pelicula;
+    private Horario horario;
     private String rutc;
 
     public TickNormal() {
+    	
     }
 
 
@@ -84,4 +87,24 @@ public class TickNormal {
         buffer.append(']');
         return buffer.toString();
     }
+
+
+	public Pelicula getPelicula() {
+		return pelicula;
+	}
+
+
+	public void setPelicula(Pelicula pelicula) {
+		this.pelicula = pelicula;
+	}
+
+
+	public Horario getHorario() {
+		return horario;
+	}
+
+
+	public void setHorario(Horario horario) {
+		this.horario = horario;
+	}
 }

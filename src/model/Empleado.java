@@ -1,5 +1,5 @@
 package model;
-import java.sql.Date;
+import java.util.Date;
 
 import main.Main;
 
@@ -9,6 +9,7 @@ public class Empleado {
     private String fono;
     private String mail;
     private String nombre;
+    private String numsucursal;
     private Sucursal sucursal;
     private String rute;
     private String rutsupervisor;
@@ -57,17 +58,12 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    public Sucursal getNumsucursal() {
-        return sucursal;
+    public String getNumsucursal() {
+        return numsucursal;
     }
 
     public void setNumsucursal(String numsucursal) {
-    	
-    	Sucursal proto = new Sucursal();
-    	proto.setNumerosu(numsucursal);
-        Sucursal next = (Sucursal) Main.db.queryByExample(proto).next();
-        //System.out.println(next);
-		this.sucursal = next;
+    	this.numsucursal = numsucursal;
     }
 
     public String getRute() {
@@ -125,4 +121,12 @@ public class Empleado {
         buffer.append(']');
         return buffer.toString();
     }
+
+	public Sucursal getSucursal() {
+		return sucursal;
+	}
+
+	public void setSucursal(Sucursal sucursal) {
+		this.sucursal = sucursal;
+	}
 }

@@ -8,11 +8,12 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 import java.text.Normalizer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.regex.Pattern;
 
 import com.db4o.Db4oEmbedded;
@@ -114,10 +115,11 @@ public class Mapper {
 	}
 
 	public static Date toDate(String fechas) {
-		//System.out.println(fechas);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			return new Date(format.parse(fechas).getTime());
+			Date date = new Date(format.parse(fechas).getTime());
+			//System.out.println(fechas+ " " + date.toString());
+			return date;
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

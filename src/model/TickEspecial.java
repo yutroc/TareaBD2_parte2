@@ -9,6 +9,8 @@ public class TickEspecial {
     private String premium;
     private int puntoSumado;
     private String rutc;
+    private Pelicula pelicula;
+    private Horario horario;
 
     public TickEspecial() {
     }
@@ -120,4 +122,24 @@ public class TickEspecial {
         buffer.append(']');
         return buffer.toString();
     }
+
+
+	public Pelicula getPelicula() {
+		return pelicula;
+	}
+
+
+	public void setPelicula(Pelicula pelicula) {
+		this.pelicula = pelicula;
+	}
+
+
+	public Horario getHorario() {
+		return horario;
+	}
+
+
+	public void setHorario(Horario horario) {
+		this.horario = horario;
+	}
 }
