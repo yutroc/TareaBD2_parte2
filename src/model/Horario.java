@@ -11,13 +11,9 @@ public class Horario {
     private Timestamp hora;
     private int numsala;
     private int numsucur;
-    private List<TickNormal> tickNormal;
-    private List<TickEspecial> tickEspecial;
     
 
     public Horario() {
-    	tickNormal = new ArrayList<TickNormal>();
-    	setTickEspecial(new ArrayList<TickEspecial>());
     }
 
 
@@ -96,31 +92,4 @@ public class Horario {
     }
 
 
-	public List<TickNormal> getTickNormal() {
-		return tickNormal;
-	}
-
-
-	public void setTickNormal(List<TickNormal> tickNormal) {
-		this.tickNormal = tickNormal;
-	}
-	
-	public void addTickNormal(TickNormal tickNormal) {
-		this.tickNormal.add(tickNormal);
-	}
-
-
-	public List<TickEspecial> getTickEspecial() {
-		return tickEspecial;
-	}
-
-
-	public void setTickEspecial(List<TickEspecial> tickEspecial) {
-		this.tickEspecial = tickEspecial;
-	}
-
-	
-	public void addTickEspecial(TickEspecial tickEspecial) {
-		this.tickEspecial.add(tickEspecial);
-	}
 }

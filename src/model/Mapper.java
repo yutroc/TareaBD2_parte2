@@ -29,7 +29,9 @@ public class Mapper {
 	public static void readAllCSV(String sFolder, Class c, ObjectContainer db) {
 		String applicationDir = c.getProtectionDomain()
 				.getCodeSource().getLocation().getPath();
-		File folder = new File(applicationDir + sFolder);
+		File folder = new File(sFolder);
+                
+                System.out.println(folder);
 		File[] listOfFiles = folder.listFiles();
 
 		for (File file : listOfFiles) {
@@ -98,11 +100,11 @@ public class Mapper {
 	
 	public static String remove1(String input) {
 
-		input = input.replace ('á','a'); 
-		input = input.replace ('é','e'); 
-		input = input.replace ('í','i'); 
-		input = input.replace ('ó','o'); 
-		input = input.replace ('ú','u'); 
+		input = input.replace ('Ã¡','a'); 
+		input = input.replace ('Ã©','e'); 
+		input = input.replace ('Ã­','i'); 
+		input = input.replace ('Ã³','o'); 
+		input = input.replace ('Ãº','u'); 
 	    return input;
 	}//remove1
 	
