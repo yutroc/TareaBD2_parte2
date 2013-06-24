@@ -1,8 +1,7 @@
 package model;
 import java.util.Date;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Pelicula {
     private String clasificacion;

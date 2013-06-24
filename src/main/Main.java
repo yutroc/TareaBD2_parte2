@@ -5,22 +5,16 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.query.Query;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import model.Empleado;
-import model.EncargadoSucursal;
-import model.Horario;
-import model.Mapper;
-import model.Pelicula;
-import model.Sucursal;
-import model.TickEspecial;
-import model.TickNormal;
+import model.*;
 
 public class Main {
 
@@ -28,7 +22,7 @@ public class Main {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        boolean cargarBD = true;
+        boolean cargarBD = false;
         if (cargarBD) {
             File f = new File("BD/test3.db");
             f.delete();
@@ -39,6 +33,7 @@ public class Main {
         if (cargarBD) {
             Mapper.readAllCSV("CSV", Main.class, db);
             db.commit();
+            //Vincular Empleado y supervisor
             List empleados = db.query(Empleado.class);
             for (int i = 0; i < empleados.size(); i++) {
                 Empleado empleado = (Empleado) empleados.get(i);
@@ -56,6 +51,7 @@ public class Main {
                 }
             }
             db.commit();
+            //Vincular Empleado - Sucursal
             List encargado_sucursal = db.query(EncargadoSucursal.class);
             for (int i = 0; i < encargado_sucursal.size(); i++) {
                 EncargadoSucursal encargado = (EncargadoSucursal) encargado_sucursal.get(i);
@@ -108,6 +104,17 @@ public class Main {
                 db.store(h);
             }
             db.commit();
+            
+            //Relacion horario - Sala
+            List<Horario> horarios = db.query(Horario.class);
+            for(Horario horario : horarios){
+                Sala sproto = new Sala();
+                sproto.setNumerosa(""+horario.getNumsala());
+                Sala sala = (Sala) db.queryByExample(sproto).next();
+                horario.setSala(sala);
+                db.store(horario);
+            }
+            db.commit();
             System.out.println("done - Relacion de ticket - pelicula y horario");
         }
         consulta1();
@@ -125,19 +132,80 @@ public class Main {
             try {
                 inicio = new Date(format.parse("2012-08-01").getTime());
                 fin = new Date(format.parse("2012-08-31").getTime());
+                List<TickNormal> tickNormales = db.query(TickNormal.class);
+                List<TickEspecial> tickEspeciales = db.query(TickEspecial.class);
+                for (TickNormal tickNormal : tickNormales) {
+                    if (tickNormal.getCodigopeli() == pelicula.getCodigo()
+                            && tickNormal.getHorario().getFecha().after(inicio)
+                            && tickNormal.getHorario().getFecha().before(fin)) {
+                        visitas++;
+                    }
+                }
+                for (TickEspecial tickEspecial : tickEspeciales) {
+                    if (tickEspecial.getCodigopeli() == pelicula.getCodigo()
+                            && tickEspecial.getHorario().getFecha().after(inicio)
+                            && tickEspecial.getHorario().getFecha().before(fin)) {
+                        visitas++;
+                    }
+                }
 
             } catch (ParseException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            if (visitas > 0 && visitas < 100 && (pelicula.getClasificacion().contains("13") || pelicula.getClasificacion().contains("15") || pelicula.getClasificacion().contains("18"))) {
+            if (visitas > 0 && visitas < 100 && (pelicula.getClasificacion().contains("13") || pelicula.getClasificacion().contains("15") || pelicula.getClasificacion().contains("17"))) {
                 result.add(pelicula);
             }
-            System.out.println(pelicula.toString());
+            //System.out.println(pelicula.toString());
         }
-
+        System.out.println("1.- Peores Pelculas de adolecentes de Agosto: Muestre el ttulo de las pelculas y sus\n"
+                + "correspondientes Directores, de la que ha sido vistas menos de 100 veces solo en el mes\n"
+                + "de Agosto del 2012 y ademas posean clasicacion \\+13\", \\+15\" y \\+17\" para que los\n"
+                + "comentaristas realicen una crtica al director de la pelicula.\n"
+                + "Resultado:");
         for (Pelicula pelicula : result) {
             System.out.println(pelicula.getTitulo() + " " + pelicula.getDirector());
         }
+    }
+
+    private static void consulta2() {
+        List<Pelicula> peliculas = db.query(Pelicula.class);
+        for (Pelicula pelicula : peliculas) {
+            int cont = 0;
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                List<TickNormal> tickNormales = db.query(TickNormal.class);
+                List<TickEspecial> tickEspeciales = db.query(TickEspecial.class);
+                for (TickNormal tickNormal : tickNormales) {
+                    if (tickNormal.getCodigopeli() == pelicula.getCodigo()
+                            && tickNormal.getHorario().getFecha().getMonth() == mes) {
+                        visitas++;
+                    }
+                }
+                for (TickEspecial tickEspecial : tickEspeciales) {
+                    if (tickEspecial.getCodigopeli() == pelicula.getCodigo()
+                            && tickEspecial.getHorario().getFecha().after(inicio)
+                            && tickEspecial.getHorario().getFecha().before(fin)) {
+                        visitas++;
+                    }
+                }
+
+            } catch (ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            if (visitas > 0 && visitas < 100 && (pelicula.getClasificacion().contains("13") || pelicula.getClasificacion().contains("15") || pelicula.getClasificacion().contains("17"))) {
+                result.add(pelicula);
+            }
+            //System.out.println(pelicula.toString());
+        }
+
+
+        System.out.println("2.- Director mas rentable: La empresa quiere saber quienes son los directores de pelculas que\n"
+                + "dejan mas dinero en nuestros cines, para verificar publico objetivo y publicitarlos cuando\n"
+                + "estrenen una nueva pelcula, por lo que debe mostrar el nombre del director, para cada mes,\n"
+                + "de la pelcula que mas dinero recaudo en cada mes, tambien la cantidad y monto de ventas\n"
+                + "mensuales en tickets para todo lo que va del 2012, en orden descendente de monto de ventas.\n"
+                + "Resultado:");
     }
 }

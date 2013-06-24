@@ -11,6 +11,15 @@ public class Horario {
     private Timestamp hora;
     private int numsala;
     private int numsucur;
+    private Sala sala;
+
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
     
 
     public Horario() {
