@@ -36,17 +36,17 @@ public class Main {
     public static ObjectContainer db;
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        CargarBD();
+        // TODO Auto-generated method stub        
         Scanner scan = new Scanner(System.in);
-        int caso = 0;
-        int primerCaso;
+        int caso = -1;
+        int primerCaso = -1;
         do {
 
             System.out.println("INGRESE UNA OPCION");
             System.out.println("1.-Cargar Datos                 2.-Ver Consultas");
             primerCaso = scan.nextInt();
             if (primerCaso == 1) {
+                CargarBD();
             }
             if (primerCaso == 2) {
                 System.out.println("INGRESE NUMERO DE CONSULTA QUE DESEA EJECUTAR");
@@ -83,7 +83,7 @@ public class Main {
                         break;
                 }
             }
-        } while (caso != 0);
+        } while (caso != 0 && primerCaso != 0 );
         db.close();
     }
 
@@ -233,6 +233,7 @@ public class Main {
         int i = 1;
         for (Sucursal sucursal : sortedMap.values()) {
             System.out.println(i + ".- Sucursal " + sucursal.getNombre() + " " + sucursal.getEncargado().getEmpleado().getNombre());
+            i++;
         }
     }
 
@@ -277,9 +278,60 @@ public class Main {
 
     private static void consulta6() {
         
+        System.out.println("6.- Resultado:");
+        List<PartTime> partTimes= db.query(PartTime.class);
+        Map h = new HashMap<Integer, Empleado>();
+        int montototal = 0;
+        for(PartTime partTime : partTimes){
+            PartTieneTurno pproto = new PartTieneTurno();
+            pproto.setRute(partTime.getRute());
+            ObjectSet turnos = db.queryByExample(pproto);
+            int horas_trabajadas = 0;
+            for(int i = 0; i< turnos.size(); i++){
+                PartTieneTurno ptturno = (PartTieneTurno)turnos.get(i);
+                Turno tproto = new Turno();
+                tproto.setCodigo(""+ptturno.getCodigoturno());
+                Turno turno = (Turno) db.queryByExample(tproto).next();
+                long entrada = turno.getHEnt().getTime();
+                long salida = turno.getHSal().getTime();
+                long resultado = 0;
+                if(entrada < salida){
+                    resultado = salida - entrada;
+                }else{
+                    resultado = salida + (86400000) - entrada;
+                }
+                horas_trabajadas += resultado/(1000*60*60);
+            }
+            Empleado eproto = new Empleado();
+            eproto.setRute(partTime.getRute());
+            Empleado empleado = (Empleado) db.queryByExample(eproto).next();
+            int monto = horas_trabajadas*partTime.getHonorarioPorHora();
+            montototal += monto;
+            h.put(monto, empleado);            
+        }
+        Map<Integer, Empleado> sortedMap = new TreeMap<Integer, Empleado>(h);
+        int i = 1;        
+        for (Map.Entry<Integer, Empleado> entry : sortedMap.entrySet()) {
+            Empleado empleado = entry.getValue();
+            Calendar dob = Calendar.getInstance();
+                dob.setTime(empleado.getFechaNacimiento());
+                Calendar today = Calendar.getInstance();
+                int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+                if (today.get(Calendar.MONTH) < dob.get(Calendar.MONTH)) {
+                    age--;
+                } else if (today.get(Calendar.MONTH) == dob.get(Calendar.MONTH)
+                        && today.get(Calendar.DAY_OF_MONTH) < dob.get(Calendar.DAY_OF_MONTH)) {
+                    age--;
+                }
+            float porc = entry.getKey().floatValue() / montototal;
+            System.out.println(i + ".- Nombre " + empleado.getNombre() + " Edad: " + age + " SueldoAnual: "+ entry.getKey()+ " porcentaje: " + porc+"%");
+            i++;
+        }
     }
     
     private static void consulta7() {
+        
+        System.out.println("7.- Resultado:");
         List<Empleado> empleados = db.query(Empleado.class);
         String rut = "";
         for (Empleado empleado : empleados) {
@@ -364,6 +416,8 @@ public class Main {
 
 
 private static void consulta8() {
+    
+        System.out.println("8.- Resultado:");
         List<Sucursal> sucursal = db.query(Sucursal.class);
         for (Sucursal s : sucursal) {
             if (s.getRegion().equalsIgnoreCase("I")) {
@@ -594,6 +648,8 @@ private static void consulta8() {
 
             db.commit();
 
+        }else{
+            System.out.println("La base de datos ya estaba cargada, por lo que no se creó ni leyó nada");
         }
     }
 }
