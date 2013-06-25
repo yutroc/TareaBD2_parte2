@@ -8,6 +8,15 @@ public class Ticket {
     private Date fechaCompra;
     private Timestamp horaCompra;
     private String rutcajero;
+    private Cajero cajero;
+
+    public Cajero getCajero() {
+        return cajero;
+    }
+
+    public void setCajero(Cajero cajero) {
+        this.cajero = cajero;
+    }
 
     public Ticket() {
     }
