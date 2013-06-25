@@ -11,6 +11,9 @@ import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.query.Query;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +25,7 @@ public class Main {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        boolean cargarBD = false;
+        boolean cargarBD = true;
         if (cargarBD) {
             File f = new File("BD/test3.db");
             f.delete();
@@ -104,20 +107,55 @@ public class Main {
                 db.store(h);
             }
             db.commit();
-            
+
             //Relacion horario - Sala
             List<Horario> horarios = db.query(Horario.class);
-            for(Horario horario : horarios){
+            for (Horario horario : horarios) {
                 Sala sproto = new Sala();
-                sproto.setNumerosa(""+horario.getNumsala());
+                sproto.setNumerosa("" + horario.getNumsala());
                 Sala sala = (Sala) db.queryByExample(sproto).next();
                 horario.setSala(sala);
                 db.store(horario);
             }
             db.commit();
-            System.out.println("done - Relacion de ticket - pelicula y horario");
+            
+            //Relacion Comercio Asociado - Empleado
+            List<ComercioAsociado> comercioAsociados = db.query(ComercioAsociado.class);
+            for(ComercioAsociado comercioAsociado :comercioAsociados){
+                Empleado eproto = new Empleado();
+                eproto.setRute(comercioAsociado.getRutadmin());
+                Empleado empleado = (Empleado) db.queryByExample(eproto).next();
+                comercioAsociado.setEmpleado(empleado);
+                db.store(comercioAsociado);
+            }
+            
+            //Relacion producto - comercioAsociado
+            List<Producto> productos = db.query(Producto.class);
+            for(Producto producto :productos){
+                ComercioAsociado cproto = new ComercioAsociado();
+                cproto.setCodigoca(producto.getCodigoca()+"");
+                ComercioAsociado comercioAsociado = (ComercioAsociado) db.queryByExample(cproto).next();
+                producto.setComercioAsociado(comercioAsociado);
+                db.store(producto);
+            }
+            
+            //Relacion producto - cliente compra producto
+            List<ClienteCompraProduc> clienteCompraProductos = db.query(ClienteCompraProduc.class);
+            for(ClienteCompraProduc clienteCompraProducto : clienteCompraProductos){
+                Producto pproto = new Producto();
+                pproto.setNumero(clienteCompraProducto.getNumproducto());
+                Producto producto = (Producto) db.queryByExample(pproto).next();
+                clienteCompraProducto.setProducto(producto);
+                db.store(clienteCompraProducto);
+            }
+            db.commit();
+            
         }
         consulta1();
+        consulta2();
+        consulta3();
+        consulta4();
+        consulta5();
         db.close();
     }
 
@@ -158,54 +196,125 @@ public class Main {
             }
             //System.out.println(pelicula.toString());
         }
-        System.out.println("1.- Peores Pelculas de adolecentes de Agosto: Muestre el ttulo de las pelculas y sus\n"
-                + "correspondientes Directores, de la que ha sido vistas menos de 100 veces solo en el mes\n"
-                + "de Agosto del 2012 y ademas posean clasicacion \\+13\", \\+15\" y \\+17\" para que los\n"
-                + "comentaristas realicen una crtica al director de la pelicula.\n"
-                + "Resultado:");
+        System.out.println("1.- Resultado:");
         for (Pelicula pelicula : result) {
             System.out.println(pelicula.getTitulo() + " " + pelicula.getDirector());
         }
     }
 
     private static void consulta2() {
+        System.out.println("2.- Resultado:");
         List<Pelicula> peliculas = db.query(Pelicula.class);
-        for (Pelicula pelicula : peliculas) {
-            int cont = 0;
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                List<TickNormal> tickNormales = db.query(TickNormal.class);
-                List<TickEspecial> tickEspeciales = db.query(TickEspecial.class);
+        List<TickNormal> tickNormales = db.query(TickNormal.class);
+        List<TickEspecial> tickEspeciales = db.query(TickEspecial.class);
+        for (int mes = 0; mes < 12; mes++) {
+            int max = 0;
+            List<Pelicula> peliculadelmes = new ArrayList<Pelicula>();
+            for (Pelicula pelicula : peliculas) {
+                int cont = 0;
                 for (TickNormal tickNormal : tickNormales) {
                     if (tickNormal.getCodigopeli() == pelicula.getCodigo()
-                            && tickNormal.getHorario().getFecha().getMonth() == mes) {
-                        visitas++;
+                            && tickNormal.getHorario().getFecha().getMonth() == mes
+                            && tickNormal.getHorario().getFecha().getYear() == 2012) {
+                        cont += tickNormal.getHorario().getSala().getValorEntrada();
                     }
                 }
                 for (TickEspecial tickEspecial : tickEspeciales) {
                     if (tickEspecial.getCodigopeli() == pelicula.getCodigo()
-                            && tickEspecial.getHorario().getFecha().after(inicio)
-                            && tickEspecial.getHorario().getFecha().before(fin)) {
-                        visitas++;
+                            && tickEspecial.getHorario().getFecha().getMonth() == mes
+                            && tickEspecial.getHorario().getFecha().getYear() == 112) {
+                        cont += tickEspecial.getHorario().getSala().getValorEntrada();
                     }
                 }
-
-            } catch (ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                if (cont > max) {
+                    max = cont;
+                    peliculadelmes.clear();
+                    peliculadelmes.add(pelicula);
+                }else if(cont == max){
+                    peliculadelmes.add(pelicula);                    
+                }
             }
-            if (visitas > 0 && visitas < 100 && (pelicula.getClasificacion().contains("13") || pelicula.getClasificacion().contains("15") || pelicula.getClasificacion().contains("17"))) {
-                result.add(pelicula);
+            DateFormat formatter = new SimpleDateFormat("MMMMM");
+            GregorianCalendar calendar = new GregorianCalendar();
+            calendar.set(Calendar.MONTH, mes);
+            formatter.format(calendar.getTime());
+            System.out.println("\nPelicula del Mes "+formatter.format(calendar.getTime())+" : VentaTotal: "+ max);
+            for (Pelicula pelicula : peliculadelmes) {
+                System.out.println(pelicula.getTitulo() + " " + pelicula.getDirector());
             }
-            //System.out.println(pelicula.toString());
         }
+        
+    }
+    
+    private static void consulta3() {
+        System.out.println("3.- Resultado:");
+        List<Sucursal> sucursales = db.query(Sucursal.class);
+        List<Horario> horarios = db.query(Horario.class);        
+        List<ClienteCompraProduc> ccproductos = db.query(ClienteCompraProduc.class);
+        for(Sucursal sucursal : sucursales){
+            int[] suma = new int[12];
+            for(Horario horario:horarios){
+                if(horario.getNumsucur() == sucursal.getNumerosu()){                    
+                    suma[horario.getFecha().getMonth()]+=horario.getSala().getValorEntrada();
+                }
+            }
+            
+            for(ClienteCompraProduc ccproducto : ccproductos){
+                if(ccproducto.getProducto().getComercioAsociado().getEmpleado().getNumsucursal().equals(sucursal.getNumerosu()+"")){
+                    suma[ccproducto.getFecha().getMonth()]+=ccproducto.getProducto().getValorEnPesos();
+                }
+            }
+            float prom = (suma[0] + suma[1]+suma[2]+suma[3]+suma[4]+suma[5]+suma[6]+suma[7]+suma[8]+suma[9]+suma[10]+suma[11])/12;
+            System.out.println("Sucursal " + sucursal.getNombre() +", Promedio ventas: "+prom +", Comuna " + sucursal.getComuna());
+            
+        }
+    }
 
+    private static void consulta4() {
+        System.out.println("4.- Resultado:");
+        List<Sucursal> sucursales = db.query(Sucursal.class);
+        List<Horario> horarios = db.query(Horario.class);        
+        List<ClienteCompraProduc> ccproductos = db.query(ClienteCompraProduc.class);
+        for(Sucursal sucursal : sucursales){
+            int[] suma = new int[12];
+            for(Horario horario:horarios){
+                if(horario.getNumsucur() == sucursal.getNumerosu()){                    
+                    suma[horario.getFecha().getMonth()]+=horario.getSala().getValorEntrada();
+                }
+            }
+            
+            for(ClienteCompraProduc ccproducto : ccproductos){
+                if(ccproducto.getProducto().getComercioAsociado().getEmpleado().getNumsucursal().equals(sucursal.getNumerosu()+"")){
+                    suma[ccproducto.getFecha().getMonth()]+=ccproducto.getProducto().getValorEnPesos();
+                }
+            }
+            float prom = (suma[0] + suma[1]+suma[2]+suma[3]+suma[4]+suma[5]+suma[6]+suma[7]+suma[8]+suma[9]+suma[10]+suma[11])/12;
+            System.out.println("Sucursal " + sucursal.getNombre() +", Promedio ventas: "+prom +", Comuna " + sucursal.getComuna());
+            
+        }
+    }
 
-        System.out.println("2.- Director mas rentable: La empresa quiere saber quienes son los directores de pelculas que\n"
-                + "dejan mas dinero en nuestros cines, para verificar publico objetivo y publicitarlos cuando\n"
-                + "estrenen una nueva pelcula, por lo que debe mostrar el nombre del director, para cada mes,\n"
-                + "de la pelcula que mas dinero recaudo en cada mes, tambien la cantidad y monto de ventas\n"
-                + "mensuales en tickets para todo lo que va del 2012, en orden descendente de monto de ventas.\n"
-                + "Resultado:");
+    private static void consulta5() {
+        System.out.println("5.- Resultado:");
+        List<Sucursal> sucursales = db.query(Sucursal.class);
+        List<Horario> horarios = db.query(Horario.class);        
+        List<ClienteCompraProduc> ccproductos = db.query(ClienteCompraProduc.class);
+        for(Sucursal sucursal : sucursales){
+            int[] suma = new int[12];
+            for(Horario horario:horarios){
+                if(horario.getNumsucur() == sucursal.getNumerosu()){                    
+                    suma[horario.getFecha().getMonth()]+=horario.getSala().getValorEntrada();
+                }
+            }
+            
+            for(ClienteCompraProduc ccproducto : ccproductos){
+                if(ccproducto.getProducto().getComercioAsociado().getEmpleado().getNumsucursal().equals(sucursal.getNumerosu()+"")){
+                    suma[ccproducto.getFecha().getMonth()]+=ccproducto.getProducto().getValorEnPesos();
+                }
+            }
+            float prom = (suma[0] + suma[1]+suma[2]+suma[3]+suma[4]+suma[5]+suma[6]+suma[7]+suma[8]+suma[9]+suma[10]+suma[11])/12;
+            System.out.println("Sucursal " + sucursal.getNombre() +", Promedio ventas: "+prom +", Comuna " + sucursal.getComuna());
+            
+        }
     }
 }

@@ -4,6 +4,15 @@ public class ComercioAsociado {
     private String nombre;
     private String rubro;
     private String rutadmin;
+    private Empleado empleado;
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
 
     public ComercioAsociado() {
     }

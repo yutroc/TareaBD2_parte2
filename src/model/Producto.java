@@ -6,6 +6,15 @@ public class Producto {
     private int numero;
     private int valorEnPesos;
     private int valorEnPuntos;
+    private ComercioAsociado comercioAsociado;
+
+    public ComercioAsociado getComercioAsociado() {
+        return comercioAsociado;
+    }
+
+    public void setComercioAsociado(ComercioAsociado comercioAsociado) {
+        this.comercioAsociado = comercioAsociado;
+    }
 
     public Producto() {
     }

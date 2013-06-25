@@ -6,6 +6,15 @@ public class ClienteCompraProduc {
     private Date fecha;
     private String numproducto;
     private String rutcliente;
+    private Producto producto;
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
 
     public ClienteCompraProduc() {
     }
