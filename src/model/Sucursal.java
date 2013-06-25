@@ -8,7 +8,11 @@ public class Sucursal {
     private int numerosu;
     private String region;
     private EncargadoSucursal encargado;
-	private String rutEncargado;
+    private String rutEncargado;
+
+    public String getRutEncargado() {
+        return rutEncargado;
+    }
 
     public Sucursal() {
     }

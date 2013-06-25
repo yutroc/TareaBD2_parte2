@@ -13,7 +13,12 @@ import com.db4o.ObjectSet;
 import com.db4o.query.Query;
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +30,7 @@ public class Main {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        boolean cargarBD = true;
+        boolean cargarBD = false;
         if (cargarBD) {
             File f = new File("BD/test3.db");
             f.delete();
@@ -73,9 +78,8 @@ public class Main {
                 Sucursal next = (Sucursal) result.next();
                 next.setEncargado(encargado);
                 db.store(next);
-
-                db.commit();
             }
+                db.commit();
             //Relacion de ticket con pelicula
             List<TickNormal> tickNormal = db.query(TickNormal.class);
             for (int i = 0; i < tickNormal.size(); i++) {
@@ -118,44 +122,75 @@ public class Main {
                 db.store(horario);
             }
             db.commit();
-            
+
             //Relacion Comercio Asociado - Empleado
             List<ComercioAsociado> comercioAsociados = db.query(ComercioAsociado.class);
-            for(ComercioAsociado comercioAsociado :comercioAsociados){
+            for (ComercioAsociado comercioAsociado : comercioAsociados) {
                 Empleado eproto = new Empleado();
                 eproto.setRute(comercioAsociado.getRutadmin());
                 Empleado empleado = (Empleado) db.queryByExample(eproto).next();
                 comercioAsociado.setEmpleado(empleado);
                 db.store(comercioAsociado);
             }
-            
+
             //Relacion producto - comercioAsociado
             List<Producto> productos = db.query(Producto.class);
-            for(Producto producto :productos){
+            for (Producto producto : productos) {
                 ComercioAsociado cproto = new ComercioAsociado();
-                cproto.setCodigoca(producto.getCodigoca()+"");
+                cproto.setCodigoca(producto.getCodigoca() + "");
                 ComercioAsociado comercioAsociado = (ComercioAsociado) db.queryByExample(cproto).next();
                 producto.setComercioAsociado(comercioAsociado);
                 db.store(producto);
             }
-            
+
             //Relacion producto - cliente compra producto
             List<ClienteCompraProduc> clienteCompraProductos = db.query(ClienteCompraProduc.class);
-            for(ClienteCompraProduc clienteCompraProducto : clienteCompraProductos){
+            for (ClienteCompraProduc clienteCompraProducto : clienteCompraProductos) {
                 Producto pproto = new Producto();
                 pproto.setNumero(clienteCompraProducto.getNumproducto());
                 Producto producto = (Producto) db.queryByExample(pproto).next();
                 clienteCompraProducto.setProducto(producto);
                 db.store(clienteCompraProducto);
             }
-            db.commit();
+
+            //Relacio fulltime - empleado
+            List<FullTime> fullTimes = db.query(FullTime.class);
+            for (FullTime fullTime : fullTimes) {
+                Empleado eproto = new Empleado();
+                eproto.setRute(fullTime.getRute());;
+                Empleado empleado = (Empleado) db.queryByExample(eproto).next();
+                fullTime.setEmpleado(empleado);
+                db.store(fullTime);
+            }
             
+            //Relacion encargado - sucursal
+            List<Sucursal> sucursales = db.query(Sucursal.class);
+            for (Sucursal sucursal : sucursales) {
+                EncargadoSucursal eproto = new EncargadoSucursal();
+                eproto.setRute(sucursal.getRutEncargado());
+                EncargadoSucursal empleado = (EncargadoSucursal) db.queryByExample(eproto).next();
+                sucursal.setEncargado(eproto);
+                db.store(sucursal);
+            }
+            
+            //Relacion encargado - empleado
+            List<EncargadoSucursal> encargadoSucursales = db.query(EncargadoSucursal.class);
+            for (EncargadoSucursal encargadoSucursal : encargadoSucursales) {
+                Empleado eproto = new Empleado();
+                eproto.setRute(encargadoSucursal.getRute());
+                Empleado empleado = (Empleado) db.queryByExample(eproto).next();
+                encargadoSucursal.setEmpleado(empleado);
+                db.store(encargadoSucursal);
+            }
+
+            db.commit();
+
         }
-        consulta1();
-        consulta2();
-        consulta3();
+//        consulta1();
+//        consulta2();
+//        consulta3();
         consulta4();
-        consulta5();
+//        consulta5();
         db.close();
     }
 
@@ -230,91 +265,104 @@ public class Main {
                     max = cont;
                     peliculadelmes.clear();
                     peliculadelmes.add(pelicula);
-                }else if(cont == max){
-                    peliculadelmes.add(pelicula);                    
+                } else if (cont == max) {
+                    peliculadelmes.add(pelicula);
                 }
             }
             DateFormat formatter = new SimpleDateFormat("MMMMM");
             GregorianCalendar calendar = new GregorianCalendar();
             calendar.set(Calendar.MONTH, mes);
             formatter.format(calendar.getTime());
-            System.out.println("\nPelicula del Mes "+formatter.format(calendar.getTime())+" : VentaTotal: "+ max);
+            System.out.println("\nPelicula del Mes " + formatter.format(calendar.getTime()) + " : VentaTotal: " + max);
             for (Pelicula pelicula : peliculadelmes) {
                 System.out.println(pelicula.getTitulo() + " " + pelicula.getDirector());
             }
         }
-        
+
     }
-    
+
     private static void consulta3() {
         System.out.println("3.- Resultado:");
         List<Sucursal> sucursales = db.query(Sucursal.class);
-        List<Horario> horarios = db.query(Horario.class);        
+        List<Horario> horarios = db.query(Horario.class);
         List<ClienteCompraProduc> ccproductos = db.query(ClienteCompraProduc.class);
-        for(Sucursal sucursal : sucursales){
+        for (Sucursal sucursal : sucursales) {
             int[] suma = new int[12];
-            for(Horario horario:horarios){
-                if(horario.getNumsucur() == sucursal.getNumerosu()){                    
-                    suma[horario.getFecha().getMonth()]+=horario.getSala().getValorEntrada();
+            for (Horario horario : horarios) {
+                if (horario.getNumsucur() == sucursal.getNumerosu()) {
+                    suma[horario.getFecha().getMonth()] += horario.getSala().getValorEntrada();
                 }
             }
-            
-            for(ClienteCompraProduc ccproducto : ccproductos){
-                if(ccproducto.getProducto().getComercioAsociado().getEmpleado().getNumsucursal().equals(sucursal.getNumerosu()+"")){
-                    suma[ccproducto.getFecha().getMonth()]+=ccproducto.getProducto().getValorEnPesos();
+
+            for (ClienteCompraProduc ccproducto : ccproductos) {
+                if (ccproducto.getProducto().getComercioAsociado().getEmpleado().getNumsucursal().equals(sucursal.getNumerosu() + "")) {
+                    suma[ccproducto.getFecha().getMonth()] += ccproducto.getProducto().getValorEnPesos();
                 }
             }
-            float prom = (suma[0] + suma[1]+suma[2]+suma[3]+suma[4]+suma[5]+suma[6]+suma[7]+suma[8]+suma[9]+suma[10]+suma[11])/12;
-            System.out.println("Sucursal " + sucursal.getNombre() +", Promedio ventas: "+prom +", Comuna " + sucursal.getComuna());
-            
+            float prom = (suma[0] + suma[1] + suma[2] + suma[3] + suma[4] + suma[5] + suma[6] + suma[7] + suma[8] + suma[9] + suma[10] + suma[11]) / 12;
+            System.out.println("Sucursal " + sucursal.getNombre() + ", Promedio ventas: " + prom + ", Comuna " + sucursal.getComuna());
+
         }
     }
 
     private static void consulta4() {
         System.out.println("4.- Resultado:");
         List<Sucursal> sucursales = db.query(Sucursal.class);
-        List<Horario> horarios = db.query(Horario.class);        
-        List<ClienteCompraProduc> ccproductos = db.query(ClienteCompraProduc.class);
-        for(Sucursal sucursal : sucursales){
-            int[] suma = new int[12];
-            for(Horario horario:horarios){
-                if(horario.getNumsucur() == sucursal.getNumerosu()){                    
-                    suma[horario.getFecha().getMonth()]+=horario.getSala().getValorEntrada();
-                }
-            }
+        List<FullTime> fullTimes = db.query(FullTime.class);
+        List<TickNormal> tickNormales = db.query(TickNormal.class);
+        List<TickEspecial> tickEspeciales = db.query(TickEspecial.class);
+        Map h = new HashMap<Integer, Sucursal>();
+        for (Sucursal sucursal : sucursales) {
+            float ventas = 0;
+            float pagos = 0;
             
-            for(ClienteCompraProduc ccproducto : ccproductos){
-                if(ccproducto.getProducto().getComercioAsociado().getEmpleado().getNumsucursal().equals(sucursal.getNumerosu()+"")){
-                    suma[ccproducto.getFecha().getMonth()]+=ccproducto.getProducto().getValorEnPesos();
+            for (TickNormal tickNormal : tickNormales) {
+                    if (tickNormal.getHorario().getNumsucur() == sucursal.getNumerosu()) {
+                        ventas += tickNormal.getHorario().getSala().getValorEntrada();
+                    }
                 }
-            }
-            float prom = (suma[0] + suma[1]+suma[2]+suma[3]+suma[4]+suma[5]+suma[6]+suma[7]+suma[8]+suma[9]+suma[10]+suma[11])/12;
-            System.out.println("Sucursal " + sucursal.getNombre() +", Promedio ventas: "+prom +", Comuna " + sucursal.getComuna());
+                for (TickEspecial tickEspecial : tickEspeciales) {
+                    if (tickEspecial.getHorario().getNumsucur() == sucursal.getNumerosu()) {
+                        ventas += tickEspecial.getHorario().getSala().getValorEntrada();
+                    }
+                }
             
+            for(FullTime fullTime : fullTimes){
+                if(fullTime.getEmpleado().getNumsucursal().equals(sucursal.getNumerosu()+"")){
+                    pagos+=fullTime.getSueldo();
+                }                
+            }
+            double ROI = ventas/pagos;
+            h.put(-ROI, sucursal);
+            //System.out.println("Sucursal " + sucursal.getNombre() + ", ROI: " + ROI);
+        }
+        Map<Integer, Sucursal> sortedMap = new TreeMap<Integer, Sucursal>(h);
+        for(Sucursal sucursal : sortedMap.values()){
+            System.out.println("Sucursal " + sucursal.getNombre() + " " + sucursal.getEncargado().getEmpleado().getNombre());
         }
     }
 
     private static void consulta5() {
         System.out.println("5.- Resultado:");
         List<Sucursal> sucursales = db.query(Sucursal.class);
-        List<Horario> horarios = db.query(Horario.class);        
+        List<Horario> horarios = db.query(Horario.class);
         List<ClienteCompraProduc> ccproductos = db.query(ClienteCompraProduc.class);
-        for(Sucursal sucursal : sucursales){
+        for (Sucursal sucursal : sucursales) {
             int[] suma = new int[12];
-            for(Horario horario:horarios){
-                if(horario.getNumsucur() == sucursal.getNumerosu()){                    
-                    suma[horario.getFecha().getMonth()]+=horario.getSala().getValorEntrada();
+            for (Horario horario : horarios) {
+                if (horario.getNumsucur() == sucursal.getNumerosu()) {
+                    suma[horario.getFecha().getMonth()] += horario.getSala().getValorEntrada();
                 }
             }
-            
-            for(ClienteCompraProduc ccproducto : ccproductos){
-                if(ccproducto.getProducto().getComercioAsociado().getEmpleado().getNumsucursal().equals(sucursal.getNumerosu()+"")){
-                    suma[ccproducto.getFecha().getMonth()]+=ccproducto.getProducto().getValorEnPesos();
+
+            for (ClienteCompraProduc ccproducto : ccproductos) {
+                if (ccproducto.getProducto().getComercioAsociado().getEmpleado().getNumsucursal().equals(sucursal.getNumerosu() + "")) {
+                    suma[ccproducto.getFecha().getMonth()] += ccproducto.getProducto().getValorEnPesos();
                 }
             }
-            float prom = (suma[0] + suma[1]+suma[2]+suma[3]+suma[4]+suma[5]+suma[6]+suma[7]+suma[8]+suma[9]+suma[10]+suma[11])/12;
-            System.out.println("Sucursal " + sucursal.getNombre() +", Promedio ventas: "+prom +", Comuna " + sucursal.getComuna());
-            
+            float prom = (suma[0] + suma[1] + suma[2] + suma[3] + suma[4] + suma[5] + suma[6] + suma[7] + suma[8] + suma[9] + suma[10] + suma[11]) / 12;
+            System.out.println("Sucursal " + sucursal.getNombre() + ", Promedio ventas: " + prom + ", Comuna " + sucursal.getComuna());
+
         }
     }
 }

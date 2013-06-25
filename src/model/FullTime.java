@@ -3,6 +3,15 @@ public class FullTime {
     private int bono;
     private String rute;
     private int sueldo;
+    private Empleado empleado;
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
 
     public FullTime() {
     }
